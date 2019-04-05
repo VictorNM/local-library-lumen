@@ -138,6 +138,7 @@ return [
 
                 // author queries
                 'authors' => App\GraphQL\Query\AuthorsQuery::class,
+                'author' => App\GraphQL\Query\AuthorByIdQuery::class,
             ],
             'mutation' => [
                 /// book mutations

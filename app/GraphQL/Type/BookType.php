@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Type;
 
+use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
@@ -20,8 +21,8 @@ class BookType extends GraphQLType
             'title' => [
                 'type' => Type::nonNull(Type::string()),
             ],
-            'author_id' => [
-                'type' => Type::nonNull(Type::int()),
+            'author' => [
+                'type' => Type::nonNull(GraphQL::type('author')),
             ],
             'summary' => [
                 'type' => Type::string(),

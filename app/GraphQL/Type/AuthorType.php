@@ -8,6 +8,9 @@
 
 namespace App\GraphQL\Type;
 
+use App\Book;
+use App\GraphQL\Query\BooksQuery;
+use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
@@ -26,7 +29,19 @@ class AuthorType extends GraphQLType
             ],
             'name' => [
                 'name' => 'name',
-                'type' => Type::string()
+                'type' => Type::string(),
+            ],
+            'books' => [
+                'name' => 'books',
+                'args' => [
+                    'id' => [
+                        'type' => Type::int(),
+                    ],
+                    'title' => [
+                        'type' => Type::string(),
+                    ]
+                ],
+                'type' => Type::listOf(GraphQL::type('book')),
             ]
         ];
     }
@@ -34,5 +49,11 @@ class AuthorType extends GraphQLType
     public function resolveNameField($root)
     {
         return $root->first_name . ' ' . $root->family_name;
+    }
+
+    public function resolveBooksField($root, $args)
+    {
+        $booksQuery = new BooksQuery();
+        return $booksQuery->resolve($root, $args);
     }
 }
