@@ -133,6 +133,8 @@ return [
         'v1' => [
             'query' => [
                 'books' => App\GraphQL\Query\BooksQuery::class,
+                'book' => App\GraphQL\Query\BookByIdQuery::class,
+                'authors' => App\GraphQL\Query\AuthorsQuery::class,
             ],
             'mutation' => [
                 'newBook' => App\GraphQL\Mutation\NewBookMutation::class,

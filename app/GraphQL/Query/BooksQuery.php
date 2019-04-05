@@ -11,7 +11,6 @@ namespace App\GraphQL\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
-use App\Book;
 use Illuminate\Support\Facades\DB;
 
 
@@ -40,6 +39,10 @@ class BooksQuery extends Query
             'author_id' => [
                 'name' => 'author_id',
                 'type' => Type::int()
+            ],
+            'isbn' => [
+                'name' => 'isbn',
+                'type' => Type::string()
             ]
         ];
     }
@@ -59,6 +62,10 @@ class BooksQuery extends Query
 
         if (isset($args['author_id'])) {
             $books->where('author_id', $args['author_id']);
+        }
+
+        if (isset($args['isbn'])) {
+            $books->where('isbn', 'like', "%{$args['isbn']}%");
         }
 
         return $books->get();
