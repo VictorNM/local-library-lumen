@@ -148,6 +148,7 @@ return [
 
                 /// author mutations
                 'newAuthor' => App\GraphQL\Mutation\NewAuthorMutation::class,
+                'updateAuthor' => App\GraphQL\Mutation\UpdateAuthorMutation::class,
             ]
         ]
     ],

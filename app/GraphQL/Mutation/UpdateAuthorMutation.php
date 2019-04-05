@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: novobi
  * Date: 4/5/2019
- * Time: 3:21 PM
+ * Time: 5:30 PM
  */
 
 namespace App\GraphQL\Mutation;
@@ -13,10 +13,12 @@ use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
 use App\Author;
 
-class NewAuthorMutation extends Mutation
+// TODO: (for all mutations: find the way to delete value of null-alble fields)
+
+class UpdateAuthorMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'newAuthor'
+        'name' => 'updateAuthor'
     ];
 
     public function type()
@@ -27,15 +29,18 @@ class NewAuthorMutation extends Mutation
     public function args()
     {
         return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::nonNull(Type::int()),
+                'rules' => ['required']
+            ],
             'first_name' => [
                 'name' => 'first_name',
-                'type' => Type::nonNull(Type::string()),
-                'rules' => ['required']
+                'type' => Type::string(),
             ],
             'family_name' => [
                 'name' => 'family_name',
-                'type' => Type::nonNull(Type::string()),
-                'rules' => ['required']
+                'type' => Type::string(),
             ],
             'date_of_birth' => [
                 'name' => 'date_of_birth',
@@ -52,11 +57,27 @@ class NewAuthorMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        $author = new Author();
-        $author->first_name = $args['first_name'];
-        $author->family_name = $args['family_name'];
-        $author->date_of_birth = $args['date_of_birth'];
-        $author->date_of_death = $args['date_of_death'];
+        $author = Author::find($args['id']);
+
+        if (!$author) {
+            return null;
+        }
+
+        if (isset($args['first_name'])) {
+            $author->first_name = $args['first_name'];
+        }
+
+        if (isset($args['family_name'])) {
+            $author->family_name = $args['family_name'];
+        }
+
+        if (isset($args['date_of_birth'])) {
+            $author->date_of_birth = $args['date_of_birth'];
+        }
+
+        if (isset($args['date_of_death'])) {
+            $author->date_of_death = $args['date_of_death'];
+        }
 
         $author->save();
         return $author;
