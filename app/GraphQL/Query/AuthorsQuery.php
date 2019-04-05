@@ -11,6 +11,7 @@ namespace App\GraphQL\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
+use App\Author;
 
 class AuthorsQuery extends Query
 {
@@ -20,7 +21,7 @@ class AuthorsQuery extends Query
 
     public function type()
     {
-        return Type::string();
+        return Type::listOf(GraphQL::type('author'));
     }
 
     public function args()
@@ -35,6 +36,6 @@ class AuthorsQuery extends Query
 
     public function resolve($root, $args)
     {
-        return 'You are looking for author: ' . $args['name'];
+        return Author::all();
     }
 }

@@ -132,14 +132,21 @@ return [
         ],
         'v1' => [
             'query' => [
+                // book queries
                 'books' => App\GraphQL\Query\BooksQuery::class,
                 'book' => App\GraphQL\Query\BookByIdQuery::class,
+
+                // author queries
                 'authors' => App\GraphQL\Query\AuthorsQuery::class,
             ],
             'mutation' => [
+                /// book mutations
                 'newBook' => App\GraphQL\Mutation\NewBookMutation::class,
                 'updateBook' => App\GraphQL\Mutation\UpdateBookMutation::class,
                 'deleteBook' => App\GraphQL\Mutation\DeleteBookMutation::class,
+
+                /// author mutations
+                'newAuthor' => App\GraphQL\Mutation\NewAuthorMutation::class,
             ]
         ]
     ],
@@ -194,6 +201,7 @@ return [
      */
     'types' => [
         'book' => App\GraphQL\Type\BookType::class,
+        'author' => App\GraphQL\Type\AuthorType::class,
     ],
 
     /*

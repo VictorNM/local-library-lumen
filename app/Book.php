@@ -15,10 +15,8 @@ class Book extends Model
         'title', 'author_id', 'summary', 'isbn'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }
