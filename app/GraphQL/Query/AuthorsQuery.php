@@ -36,6 +36,7 @@ class AuthorsQuery extends Query
 
     public function resolve($root, $args)
     {
+        // TODO: add filter by args
         return Author::all();
     }
 }
