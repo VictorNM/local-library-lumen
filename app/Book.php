@@ -19,4 +19,8 @@ class Book extends Model
     {
         return $this->belongsTo(Author::class);
     }
+    public function bookIntances()
+    {
+        return $this->hasMany(BookInstance::class);
+    }
 }

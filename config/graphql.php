@@ -139,6 +139,9 @@ return [
                 // author queries
                 'authors' => App\GraphQL\Query\AuthorsQuery::class,
                 'author' => App\GraphQL\Query\AuthorByIdQuery::class,
+
+                // book instances queries
+                'bookInstances' => \App\GraphQL\Query\BookInstancesQuery::class
             ],
             'mutation' => [
                 /// book mutations
@@ -149,7 +152,12 @@ return [
                 /// author mutations
                 'newAuthor' => App\GraphQL\Mutation\NewAuthorMutation::class,
                 'updateAuthor' => App\GraphQL\Mutation\UpdateAuthorMutation::class,
-                'deleteAuthor' => \App\GraphQL\Mutation\DeleteAuthorMutation::class
+                'deleteAuthor' => \App\GraphQL\Mutation\DeleteAuthorMutation::class,
+
+                // book instance mutations
+                'newBookInstance' => \App\GraphQL\Mutation\NewBookInstanceMutation::class,
+                'updateBookInstance' => \App\GraphQL\Mutation\UpdateBookInstanceMutation::class,
+                'deleteBookInstance' => \App\GraphQL\Mutation\DeleteBookInstanceMutation::class,
             ]
         ]
     ],
@@ -205,6 +213,8 @@ return [
     'types' => [
         'book' => App\GraphQL\Type\BookType::class,
         'author' => App\GraphQL\Type\AuthorType::class,
+        'bookInstanceStatus' => \App\GraphQL\Type\BookInstanceStatusType::class,
+        'bookInstance' => App\GraphQL\Type\BookInstanceType::class
     ],
 
     /*
