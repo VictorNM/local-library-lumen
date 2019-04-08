@@ -3,11 +3,9 @@
 
 namespace App\GraphQL\Type;
 
-use App\GraphQL\Query\BooksQuery;
+use Folklore\GraphQL\Support\Type as GraphQLType;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Type as GraphQLType;
-use Carbon\Carbon;
 
 class BookInstanceType extends GraphQLType
 {

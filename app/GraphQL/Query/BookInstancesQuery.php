@@ -4,9 +4,9 @@
 namespace App\GraphQL\Query;
 
 use App\BookInstance;
+use Folklore\GraphQL\Support\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Query;
 
 class BookInstancesQuery extends Query
 {

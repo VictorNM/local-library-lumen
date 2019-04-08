@@ -8,9 +8,8 @@
 
 namespace App\GraphQL\Type;
 
-use GraphQL\Type\Definition\ScalarType;
 use Carbon\Carbon;
-
+use GraphQL\Type\Definition\ScalarType;
 use Illuminate\Support\Facades\Log;
 
 class DateType extends ScalarType

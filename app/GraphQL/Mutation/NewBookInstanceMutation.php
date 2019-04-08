@@ -4,11 +4,10 @@
 namespace App\GraphQL\Mutation;
 
 use App\Book;
-use GraphQL;
-use Folklore\GraphQL\Support\Mutation;
-use GraphQL\Type\Definition\Type;
 use App\BookInstance;
-use http\Exception\InvalidArgumentException;
+use Folklore\GraphQL\Support\Mutation;
+use GraphQL;
+use GraphQL\Type\Definition\Type;
 
 
 class NewBookInstanceMutation extends Mutation

@@ -2,9 +2,9 @@
 
 namespace App\GraphQL\Type;
 
+use Folklore\GraphQL\Support\Type as GraphQLType;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Type as GraphQLType;
 
 class BookType extends GraphQLType
 {

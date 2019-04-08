@@ -8,12 +8,11 @@
 
 namespace App\GraphQL\Type;
 
-use App\Book;
 use App\GraphQL\Query\BooksQuery;
+use Carbon\Carbon;
+use Folklore\GraphQL\Support\Type as GraphQLType;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Type as GraphQLType;
-use Carbon\Carbon;
 
 class AuthorType extends GraphQLType
 {

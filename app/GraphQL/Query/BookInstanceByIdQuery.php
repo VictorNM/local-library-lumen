@@ -1,27 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: novobi
- * Date: 4/5/2019
- * Time: 3:40 PM
- */
+
 
 namespace App\GraphQL\Query;
 
-use App\Author;
-use Folklore\GraphQL\Support\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
+use Folklore\GraphQL\Support\Query;
+use App\BookInstance;
 
-class AuthorByIdQuery extends Query
+class BookInstanceByIdQuery extends Query
 {
     protected $attributes = [
-        'name' => 'author'
+        'name' => 'bookInstance'
     ];
 
     public function type()
     {
-        return GraphQL::type('author');
+        return GraphQL::type('bookInstance');
     }
 
     public function args()
@@ -36,10 +31,10 @@ class AuthorByIdQuery extends Query
 
     public function resolve($root, $args)
     {
-        $author = Author::find($args['id']);
-        if (!$author) {
-            throw new \InvalidArgumentException("Author Not Found");
+        $bookInstance = BookInstance::find($args['id']);
+        if (!$bookInstance) {
+            throw new \InvalidArgumentException("BookInstance not found");
         }
-        return $author;
+        return $bookInstance;
     }
 }

@@ -141,7 +141,8 @@ return [
                 'author' => App\GraphQL\Query\AuthorByIdQuery::class,
 
                 // book instances queries
-                'bookInstances' => \App\GraphQL\Query\BookInstancesQuery::class
+                'bookInstances' => \App\GraphQL\Query\BookInstancesQuery::class,
+                'bookInstance' => \App\GraphQL\Query\BookInstanceByIdQuery::class,
             ],
             'mutation' => [
                 /// book mutations

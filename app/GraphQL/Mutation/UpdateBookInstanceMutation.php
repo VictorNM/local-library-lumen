@@ -4,10 +4,10 @@
 namespace App\GraphQL\Mutation;
 
 use App\Book;
+use App\BookInstance;
 use Folklore\GraphQL\Support\Mutation;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use App\BookInstance;
 
 class UpdateBookInstanceMutation extends Mutation
 {

@@ -9,10 +9,10 @@
 namespace App\GraphQL\Mutation;
 
 use App\Author;
+use App\Book;
+use Folklore\GraphQL\Support\Mutation;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Mutation;
-use App\Book;
 
 class UpdateBookMutation extends Mutation
 {

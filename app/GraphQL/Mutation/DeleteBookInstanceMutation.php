@@ -3,10 +3,9 @@
 
 namespace App\GraphQL\Mutation;
 
-use GraphQL;
-use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Mutation;
 use App\BookInstance;
+use Folklore\GraphQL\Support\Mutation;
+use GraphQL\Type\Definition\Type;
 
 class DeleteBookInstanceMutation extends Mutation
 {

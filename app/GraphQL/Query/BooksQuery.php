@@ -9,9 +9,9 @@
 namespace App\GraphQL\Query;
 
 use App\Book;
+use Folklore\GraphQL\Support\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Query;
 
 
 class BooksQuery extends Query
