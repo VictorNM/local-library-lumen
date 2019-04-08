@@ -10,6 +10,7 @@ namespace App\GraphQL\Mutation;
 
 use App\Author;
 use App\Book;
+use App\Genre;
 use Folklore\GraphQL\Support\Mutation;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
@@ -48,6 +49,10 @@ class UpdateBookMutation extends Mutation
             'isbn' => [
                 'name' => 'isbn',
                 'type' => Type::string(),
+            ],
+            'genre_ids' => [
+                'name' => 'genre_ids',
+                'type' => Type::listOf(Type::int())
             ]
         ];
     }
@@ -79,7 +84,19 @@ class UpdateBookMutation extends Mutation
             $book->isbn = $args['isbn'];
         }
 
+        if (isset($args['genre_ids'])) {
+            $genres = Genre::find($args['genre_ids']);
+            if (sizeof($genres) != sizeof($args['genre_ids'])) {
+                throw new \InvalidArgumentException("Genres not found");
+            }
+        }
+
         $book->save();
+
+        if (isset($args['genre_ids'])) {
+            $book->genres()->sync($args['genre_ids']);
+        }
+
         return $book;
     }
 }

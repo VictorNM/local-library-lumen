@@ -165,6 +165,7 @@ return [
 
                 // genre mutations
                 'newGenre' => \App\GraphQL\Mutation\NewGenreMutation::class,
+                'updateGenre' => \App\GraphQL\Mutation\UpdateGenreMutation::class,
             ]
         ]
     ],
