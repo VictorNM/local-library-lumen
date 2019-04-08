@@ -19,8 +19,23 @@ class GenresQuery extends Query
         return Type::listOf(GraphQL::type('genre'));
     }
 
+    public function args()
+    {
+        return [
+            'name' => [
+                'name' => 'name',
+                'type' => Type::string()
+            ]
+        ];
+    }
+
     public function resolve($root, $args)
     {
-        return Genre::all();
+        $genres = Genre::query();
+        if (isset($args['name'])) {
+            $genres->where('name', 'like', "%{$args['name']}%");
+        }
+
+        return $genres->get();
     }
 }

@@ -146,6 +146,7 @@ return [
 
                 // genre queries
                 'genres' => \App\GraphQL\Query\GenresQuery::class,
+                'genre' => \App\GraphQL\Query\GenreByIdQuery::class,
             ],
             'mutation' => [
                 /// book mutations
@@ -166,6 +167,7 @@ return [
                 // genre mutations
                 'newGenre' => \App\GraphQL\Mutation\NewGenreMutation::class,
                 'updateGenre' => \App\GraphQL\Mutation\UpdateGenreMutation::class,
+                'deleteGenre' => \App\GraphQL\Mutation\DeleteGenreMutation::class,
             ]
         ]
     ],
