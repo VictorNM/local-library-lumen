@@ -143,6 +143,9 @@ return [
                 // book instances queries
                 'bookInstances' => \App\GraphQL\Query\BookInstancesQuery::class,
                 'bookInstance' => \App\GraphQL\Query\BookInstanceByIdQuery::class,
+
+                // genre queries
+                'genres' => \App\GraphQL\Query\GenresQuery::class,
             ],
             'mutation' => [
                 /// book mutations
@@ -159,6 +162,9 @@ return [
                 'newBookInstance' => \App\GraphQL\Mutation\NewBookInstanceMutation::class,
                 'updateBookInstance' => \App\GraphQL\Mutation\UpdateBookInstanceMutation::class,
                 'deleteBookInstance' => \App\GraphQL\Mutation\DeleteBookInstanceMutation::class,
+
+                // genre mutations
+                'newGenre' => \App\GraphQL\Mutation\NewGenreMutation::class,
             ]
         ]
     ],
@@ -214,8 +220,9 @@ return [
     'types' => [
         'book' => App\GraphQL\Type\BookType::class,
         'author' => App\GraphQL\Type\AuthorType::class,
-        'bookInstanceStatus' => \App\GraphQL\Type\BookInstanceStatusType::class,
-        'bookInstance' => App\GraphQL\Type\BookInstanceType::class
+        'bookInstanceStatus' => App\GraphQL\Type\BookInstanceStatusType::class,
+        'bookInstance' => App\GraphQL\Type\BookInstanceType::class,
+        'genre' => App\GraphQL\Type\GenreType::class,
     ],
 
     /*

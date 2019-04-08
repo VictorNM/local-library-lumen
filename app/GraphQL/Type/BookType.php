@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Type;
 
+use App\GraphQL\Query\BookInstancesQuery;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
@@ -30,6 +31,18 @@ class BookType extends GraphQLType
             'isbn' => [
                 'type' => Type::string(),
             ],
+            'bookInstances' => [
+                'type' => Type::listOf(GraphQL::type('bookInstance')),
+                'args' => [
+                    'status' => [
+                        'name' => 'status',
+                        'type' => GraphQL::type('bookInstanceStatus')
+                    ]
+                ]
+            ],
+            'genres' => [
+                'type' => Type::listOf(GraphQL::type('genre'))
+            ],
             'created_at' => [
                 'type' => Type::string(),
             ],
@@ -37,6 +50,12 @@ class BookType extends GraphQLType
                 'type' => Type::string(),
             ],
         ];
+    }
+
+    protected function resolveBookInstancesField($root, $args) {
+        $bookInstanceQuery = new BookInstancesQuery();
+        $args['book_id'] = $root->id;
+        return $bookInstanceQuery->resolve(null, $args);
     }
 
     protected function resolveCreatedAtField($root, $args)
