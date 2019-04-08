@@ -53,10 +53,23 @@ class NewAuthorMutation extends Mutation
     public function resolve($root, $args)
     {
         $author = new Author();
-        $author->first_name = $args['first_name'];
-        $author->family_name = $args['family_name'];
-        $author->date_of_birth = $args['date_of_birth'];
-        $author->date_of_death = $args['date_of_death'];
+
+        if (isset($args['first_name'])) {
+            $author->first_name = $args['first_name'];
+        }
+
+        if (isset($args['family_name'])) {
+            $author->family_name = $args['family_name'];
+        }
+
+        if (isset($args['date_of_birth'])) {
+            $author->date_of_birth = $args['date_of_birth'];
+        }
+
+        if (isset($args['date_of_death'])) {
+            $author->date_of_death = $args['date_of_death'];
+        }
+
 
         $author->save();
         return $author;

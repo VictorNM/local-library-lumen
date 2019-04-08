@@ -8,10 +8,12 @@
 
 namespace App\GraphQL\Query;
 
+use App\Book;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
 use Illuminate\Support\Facades\DB;
+use GraphQL\Type\Definition\ResolveInfo;
 
 
 class BooksQuery extends Query
@@ -49,7 +51,7 @@ class BooksQuery extends Query
 
     public function resolve($root, $args)
     {
-        $books = DB::table('books');
+        $books = Book::query();
 
         if (isset($args['id'])) {
             $books->where('id', $args['id']);

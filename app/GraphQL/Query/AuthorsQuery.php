@@ -27,6 +27,10 @@ class AuthorsQuery extends Query
     public function args()
     {
         return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int()
+            ],
             'name' => [
                 'name' => 'name',
                 'type' => Type::string()
@@ -36,7 +40,19 @@ class AuthorsQuery extends Query
 
     public function resolve($root, $args)
     {
-        // TODO: add filter by args
-        return Author::all();
+
+        $authors = Author::query();
+
+        if(isset($args['id'])) {
+            $authors->where('id', $args['id']);
+        }
+
+        // TODO: modify to query with full name
+        if(isset($args['name'])) {
+            $authors->orWhere('first_name', 'like', "%{$args['name']}%");
+            $authors->orWhere('family_name', 'like', "%{$args['name']}%");
+        }
+
+        return $authors->get();
     }
 }

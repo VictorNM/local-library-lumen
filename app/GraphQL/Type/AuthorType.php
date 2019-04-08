@@ -13,6 +13,7 @@ use App\GraphQL\Query\BooksQuery;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
+use Carbon\Carbon;
 
 class AuthorType extends GraphQLType
 {
@@ -24,8 +25,8 @@ class AuthorType extends GraphQLType
     {
         return [
             'id' => [
-              'name' => 'id',
-              'type' => Type::int(),
+                'name' => 'id',
+                'type' => Type::int(),
             ],
             'first_name' => [
                 'name' => 'first_name',
@@ -80,13 +81,24 @@ class AuthorType extends GraphQLType
     protected function resolveBooksField($root, $args)
     {
         $booksQuery = new BooksQuery();
-        return $booksQuery->resolve($root, $args);
+        $args['author_id'] = $root->id;
+        return $booksQuery->resolve(null, $args, null, null);
     }
 
     protected function resolveLifespanField($root, $args)
     {
-        // TODO: implement this function (lifespan = death year - birth year)
-        return 'NOT IMPLEMENTED';
+        $date_of_birth = Carbon::createFromFormat('Y-m-d', $root->date_of_birth);
+        $date_of_death = Carbon::createFromFormat('Y-m-d', $root->date_of_death);
+
+        if ($date_of_birth->year < 1) {
+            return null;
+        }
+
+        if ($date_of_death->year < 1) {
+            return Carbon::now()->diffInYears($date_of_birth);
+        }
+
+        return $date_of_death->diffInYears($date_of_birth);
     }
 
     protected function resolveCreatedAtField($root, $args)
@@ -96,6 +108,6 @@ class AuthorType extends GraphQLType
 
     protected function resolveUpdatedAtField($root, $args)
     {
-        return (string) $root->updated_at;
+        return (string)$root->updated_at;
     }
 }
