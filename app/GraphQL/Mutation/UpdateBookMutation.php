@@ -8,6 +8,7 @@
 
 namespace App\GraphQL\Mutation;
 
+use App\Author;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
@@ -56,7 +57,7 @@ class UpdateBookMutation extends Mutation
         $book = Book::find($args['id']);
 
         if (!$book) {
-            return null;
+            throw new \InvalidArgumentException("Book not found");
         }
 
         if (isset($args['title'])) {
@@ -64,6 +65,9 @@ class UpdateBookMutation extends Mutation
         }
 
         if (isset($args['author_id'])) {
+            if (!Author::find($args['author_id'])) {
+                throw new \InvalidArgumentException("Author not existed.");
+            }
             $book->author_id = $args['author_id'];
         }
 

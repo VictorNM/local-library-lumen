@@ -12,8 +12,6 @@ use App\Book;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
-use Illuminate\Support\Facades\DB;
-use GraphQL\Type\Definition\ResolveInfo;
 
 
 class BooksQuery extends Query
@@ -58,10 +56,10 @@ class BooksQuery extends Query
         }
 
         if (isset($args['title'])) {
-            $keyword = $args['title'];
-            $books->where('title', 'like', "%{$keyword}%");
+            $books->where('title', 'like', "%{$args['title']}%");
         }
 
+        // TODO: filter by author name
         if (isset($args['author_id'])) {
             $books->where('author_id', $args['author_id']);
         }

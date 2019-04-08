@@ -1,22 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: novobi
- * Date: 4/5/2019
- * Time: 11:31 AM
- */
+
 
 namespace App\GraphQL\Mutation;
 
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
-use App\Book;
+use App\Author;
 
-class DeleteBookMutation extends Mutation
+class DeleteAuthorMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'deleteBook'
+        'name' => 'deleteAuthor'
     ];
 
     public function type()
@@ -29,14 +24,13 @@ class DeleteBookMutation extends Mutation
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::nonNull(Type::int()),
-                'rules' => ['required']
+                'type' => Type::nonNull(Type::int())
             ]
         ];
     }
 
     public function resolve($root, $args)
     {
-        return Book::destroy($args['id']) > 0 ? 'Delete successfully' : 'Nothing has been deleted';
+        return Author::destroy($args['id']) > 0 ? 'Delete successfully' : 'Nothing has been deleted';
     }
 }

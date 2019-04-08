@@ -13,8 +13,6 @@ use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Mutation;
 use App\Author;
 
-// TODO: (for all mutations: find the way to delete value of null-alble fields)
-
 class UpdateAuthorMutation extends Mutation
 {
     protected $attributes = [
@@ -60,7 +58,7 @@ class UpdateAuthorMutation extends Mutation
         $author = Author::find($args['id']);
 
         if (!$author) {
-            return null;
+            throw new \InvalidArgumentException("Author not found");
         }
 
         if (isset($args['first_name'])) {

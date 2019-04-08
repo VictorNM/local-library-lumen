@@ -34,6 +34,9 @@ class BookByIdQuery extends Query
     public function resolve($root, $args)
     {
         $book = Book::find($args['id']);
+        if ($book === null) {
+            throw new \InvalidArgumentException("Book not found");
+        }
         return $book;
     }
 }

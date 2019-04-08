@@ -47,11 +47,13 @@ class AuthorsQuery extends Query
             $authors->where('id', $args['id']);
         }
 
-        // TODO: modify to query with full name
+        // TODO: modify to search with full name, Vietnamese's name order (example: Nguyen Nhat Anh => currently return null)
         if(isset($args['name'])) {
             $authors->orWhere('first_name', 'like', "%{$args['name']}%");
             $authors->orWhere('family_name', 'like', "%{$args['name']}%");
         }
+
+        // TODO: add filter by date_of_birth, date_of_death, lifespan
 
         return $authors->get();
     }
