@@ -15,7 +15,7 @@ class DeleteGenreMutation extends Mutation
 
     public function type()
     {
-        return Type::string();
+        return Type::int();
     }
 
     public function args()
@@ -31,6 +31,6 @@ class DeleteGenreMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        return Genre::destroy($args['id']) > 0 ? 'Delete successfully' : 'Nothing has been deleted';
+        return Genre::destroy($args['id']) > 0 ? $args['id'] : null;
     }
 }

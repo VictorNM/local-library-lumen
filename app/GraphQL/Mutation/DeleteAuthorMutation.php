@@ -15,7 +15,7 @@ class DeleteAuthorMutation extends Mutation
 
     public function type()
     {
-        return Type::string();
+        return Type::int();
     }
 
     public function args()
@@ -30,6 +30,6 @@ class DeleteAuthorMutation extends Mutation
 
     public function resolve($root, $args)
     {
-        return Author::destroy($args['id']) > 0 ? 'Delete successfully' : 'Nothing has been deleted';
+        return Author::destroy($args['id']) > 0 ? $args['id'] : null;
     }
 }
