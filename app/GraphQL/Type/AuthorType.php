@@ -72,6 +72,22 @@ class AuthorType extends GraphQLType
         ];
     }
 
+    protected function resolveDateOfBirthField($root)
+    {
+        if (isset($root->date_of_birth) && $root->date_of_birth == "0000-00-00") {
+            return "";
+        }
+        return $root->date_of_birth;
+    }
+
+    protected function resolveDateOfDeathField($root)
+    {
+        if (isset($root->date_of_death) && $root->date_of_death == "0000-00-00") {
+            return "";
+        }
+        return $root->date_of_death;
+    }
+
     protected function resolveNameField($root)
     {
         return $root->first_name . ' ' . $root->family_name;
@@ -87,12 +103,12 @@ class AuthorType extends GraphQLType
     protected function resolveLifespanField($root, $args)
     {
         $date_of_birth = null;
-        if (isset($root->date_of_birth)) {
+        if (isset($root->date_of_birth) && $root->date_of_birth != "") {
             $date_of_birth = Carbon::createFromFormat('Y-m-d', $root->date_of_birth);
         }
 
         $date_of_death = null;
-        if (isset($root->date_of_death)) {
+        if (isset($root->date_of_death) && $root->date_of_death != "") {
             $date_of_death = Carbon::createFromFormat('Y-m-d', $root->date_of_death);
         }
 
