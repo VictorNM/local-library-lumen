@@ -32,7 +32,7 @@ class AuthorType extends GraphQLType
                 'type' => Type::string(),
             ],
             'family_name' => [
-                'name' => 'first_name',
+                'name' => 'family_name',
                 'type' => Type::string(),
             ],
             'name' => [
@@ -86,14 +86,21 @@ class AuthorType extends GraphQLType
 
     protected function resolveLifespanField($root, $args)
     {
-        $date_of_birth = Carbon::createFromFormat('Y-m-d', $root->date_of_birth);
-        $date_of_death = Carbon::createFromFormat('Y-m-d', $root->date_of_death);
+        $date_of_birth = null;
+        if (isset($root->date_of_birth)) {
+            $date_of_birth = Carbon::createFromFormat('Y-m-d', $root->date_of_birth);
+        }
 
-        if ($date_of_birth->year < 1) {
+        $date_of_death = null;
+        if (isset($root->date_of_death)) {
+            $date_of_death = Carbon::createFromFormat('Y-m-d', $root->date_of_death);
+        }
+
+        if (!isset($date_of_birth) || $date_of_birth->year < 1) {
             return null;
         }
 
-        if ($date_of_death->year < 1) {
+        if (!isset($date_of_death) || $date_of_death->year < 1) {
             return Carbon::now()->diffInYears($date_of_birth);
         }
 
